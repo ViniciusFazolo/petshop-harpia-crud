@@ -1,0 +1,10 @@
+/* .btnsEnd{
+    position: fixed;
+    bottom: 10px;
+    padding-bottom: 1rem;
+ } */
+ 
+ .btnsEnd button, a{
+     font-weight: 400;
+     font-size: 0.9rem;
+ }

@@ -1,0 +1,17 @@
+<div class="btnsEnd flex">
+  <a [routerLink]="previousPage" class="px-3 py-2 bg-red-600 rounded-lg text-white md:hover:bg-red-700 transition me-1">
+    @if(iconPrevious == 'x'){
+      <i class="fa-solid fa-xmark me-3"></i>
+    }@else{
+      <i class="fa-solid fa-arrow-left me-3"></i>
+    }
+    <span>{{btnPrevious}}</span>
+  </a>
+
+  @if (showBtn) {
+    <button class="px-3 py-2 bg-green-600 rounded-lg text-white md:hover:bg-green-700 transition" (click)="onClick()">
+      <i class="fa-solid fa-floppy-disk me-3"></i>
+      <span>SALVAR</span>
+    </button>
+  }
+</div>

@@ -1,0 +1,19 @@
+<app-default-layout-pages [title]="idToUpdate ? 'Editar animal' : 'Novo animal'">
+    <form [formGroup]="form">
+        <div class="mb-3">
+            <label for="name" class="block mb-2 text-sm text-gray-500">Nome: *</label>
+            <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 outline-blue-500" formControlName="name"/>
+        </div>
+    
+        <div class="mb-3">
+            <label for="client" class="block mb-2 text-sm text-gray-500">Dono: *</label>
+            <select type="text" id="client" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 outline-blue-500" formControlName="client">
+                @for (client of clients; track $index) {
+                    <option [ngValue]="client">{{client.name}}</option>
+                }
+            </select>
+        </div>
+    
+        <app-btns-end [previousPage]="'/animal'" (onClickEmitter)="save()"/>
+    </form>
+</app-default-layout-pages>

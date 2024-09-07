@@ -1,0 +1,31 @@
+<app-default-layout-pages [title]="'Listagem de produto'" [btnNewLink]="'/product/new'">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead>
+                <tr>
+                    <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nome</th>
+                    <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-900">Preço</th>
+                    <th class="px-4 py-2">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+               @for (product of products; track $index) {
+                <tr>
+                    <td class="whitespace-nowrap px-4 py-2 text-blue-600">
+                        <a [routerLink]="'/product/' + product.id">{{product.name}}</a>
+                    </td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{product.price | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR"}}</td>
+                    <td class="whitespace-nowrap px-4 py-2 text-center">
+                        <button (click)="remove(product)"
+                            class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+               }
+
+            </tbody>
+        </table>
+    </div>
+</app-default-layout-pages>

@@ -1,0 +1,82 @@
+<app-default-layout-pages [title]="idToUpdate ? 'Pedido: ' + idToUpdate : 'Novo pedido'">
+    <form [formGroup]="form">
+        <div class="mb-3">
+            @if (!idToUpdate) {
+                <label for="client" class="block mb-2 text-sm text-gray-500">Cliente: *</label>
+                <ng-select
+                [items]="clients"
+                bindLabel="name"
+                formControlName="client"
+                id="client"
+                >
+                </ng-select>
+            }
+            @else{
+                <p class="mb-2 text-sm text-gray-500">Cliente: </p>
+                <h3>{{form.value.client.name}}</h3>
+            }
+        </div>
+
+        @if (!idToUpdate) {
+            <div class="flex gap-2 items-end">
+                <div class="flex-1">
+                    <label for="products" class="block mb-2 text-sm text-gray-500">Produto:</label>
+                    <ng-select
+                    [items]="products"
+                    bindLabel="name"
+                    id="products"
+                    formControlName="selectedProduct"
+                    >
+                    </ng-select>
+                </div>
+    
+                <div>
+                    <label for="qt" class="block mb-2 text-sm text-gray-500">Qtd: </label>
+                    <input type="number" formControlName="qt" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full p-2 outline-blue-500">
+                </div>
+            </div>
+    
+            <button class="py-3 px-2 my-2 bg-gray-200 rounded-lg" (click)="addProduct()">Adicionar produto</button>
+        }
+
+        @if(form.value.products.length > 0){
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold mb-2">Produtos adicionados:</h3>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="border-b py-2">Produto</th>
+                            <th class="border-b py-2">Preço</th>
+                            <th class="border-b py-2">Quantidade</th>
+                            @if(!idToUpdate){
+                                <th class="border-b py-2"></th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (product of form.value.products; track $index) {
+                            <tr>
+                                <td class="border-b py-2">{{ product.product.name }}</td>
+                                <td class="border-b py-2">{{ product.product.price | currency : "BRL" }}</td>
+                                <td class="border-b py-2">{{ product.qt }}</td>
+                               @if (!idToUpdate) {
+                                    <td class="border-b py-2">
+                                        <button class="px-3 py-2 bg-red-600 rounded" (click)="removeProduct($index)">
+                                            <i class="fa-solid fa-trash text-white"></i>
+                                        </button>
+                                    </td>
+                               }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        <div class="my-3">
+            <h3>Valor total: {{totalPrice | currency : "BRL"}}</h3>
+        </div>
+    
+        <app-btns-end [iconPrevious]="'seta'" [btnPrevious]="'VOLTAR'" [previousPage]="'/order'" (onClickEmitter)="save()" [showBtn]="idToUpdate ? false : true"/>
+    </form>
+</app-default-layout-pages>

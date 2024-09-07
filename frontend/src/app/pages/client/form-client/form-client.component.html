@@ -1,0 +1,9 @@
+<app-default-layout-pages [title]="idToUpdate ? 'Editar Cliente' : 'Novo Cliente'">
+    <form [formGroup]="form">
+        <div class="mb-3">
+            <label for="name" class="block mb-2 text-sm text-gray-500">Nome: *</label>
+            <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 outline-blue-500" formControlName="name"/>
+        </div>
+        <app-btns-end [previousPage]="'/cliente'" (onClickEmitter)="save()"/>
+    </form>
+</app-default-layout-pages>

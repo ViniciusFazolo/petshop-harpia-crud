@@ -1,0 +1,33 @@
+<app-default-layout-pages [title]="'Listagem de pedido'" [btnNewLink]="'/order/new'">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead>
+                <tr>
+                    <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-900">Cliente</th>
+                    <th class="text-start whitespace-nowrap px-4 py-2 font-medium text-gray-900">Preço Total</th>
+                    <th class="px-4 py-2">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+                @for (order of orders; track $index) {
+                    <tr>
+                        <td class="whitespace-nowrap px-4 py-2 font-medium text-blue-600">
+                            <a [routerLink]="'/order/' + order.id">{{order.client.name}}</a>
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">
+                            {{order.totalPrice | currency : "BRL"}}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-2 text-center">
+                            <button 
+                                (click)="remove(order)"
+                                class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</app-default-layout-pages>
